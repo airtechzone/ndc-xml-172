@@ -1,0 +1,1149 @@
+{
+	"info": {
+		"name": "NDC Sandbox 17.2",
+		"_postman_id": "22913af1-9193-f3a1-138d-09e2097e3c10",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Roundtrip 1ADT 1CHD",
+			"item": [
+				{
+					"name": "AirShoppingRQ Roundtrip - 1ADT 1CHD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>LHR</AirportCode>\r\n          <Date>2018-12-27</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>DXB</AirportCode>\r\n          <Date>2018-12-30</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>LHR</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>\r\n  <Preference>\r\n    <CabinPreferences>\r\n      <CabinType>\r\n        <Code>M</Code>\r\n      </CabinType>\r\n    </CabinPreferences>\r\n  </Preference>\r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n      <Passenger PassengerID=\"SH2\">\r\n        <PTC>CHD</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ Roundtrip - 1ADT 1CHD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\n    <Document>\n        <Name>KRONOS NDC GATEWAY</Name>\n        <ReferenceVersion>1.0</ReferenceVersion>\n    </Document>\n    <Party>\n        <Sender>\n            <TravelAgencySender>\n                <Name>JR TECHNOLOGIES</Name>\n                <IATA_Number>20200154</IATA_Number>\n                <AgencyID>00010080</AgencyID>\n            </TravelAgencySender>\n        </Sender>\n    </Party>\n    <Query>\n        <Order>\n            <Offer OfferID=\"OFFER14\" Owner=\"C9\" ResponseID=\"201-a0aa21d608bb48acb97db403bae4d099\">\n                <TotalOfferPrice Code=\"EUR\">1551.79</TotalOfferPrice>\n                <OfferItem OfferItemID=\"OFFERITEM14_1\">\n                    <PassengerRefs>SH2</PassengerRefs>\n                </OfferItem>\n                <OfferItem OfferItemID=\"OFFERITEM14_2\">\n                    <PassengerRefs>SH1</PassengerRefs>\n                </OfferItem>\n            </Offer>\n            <Offer OfferID=\"OFFER9\" Owner=\"C9\" ResponseID=\"201-a0aa21d608bb48acb97db403bae4d099\">\n                <TotalOfferPrice Code=\"EUR\">2173.86</TotalOfferPrice>\n                <OfferItem OfferItemID=\"OFFERITEM9_1\">\n                    <PassengerRefs>SH2</PassengerRefs>\n                </OfferItem>\n                <OfferItem OfferItemID=\"OFFERITEM9_2\">\n                    <PassengerRefs>SH1</PassengerRefs>\n                </OfferItem>\n            </Offer>\n            <Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"C9\" ResponseID=\"201-a0aa21d608bb48acb97db403bae4d099\">\n                <TotalOfferPrice Code=\"EUR\">15.0</TotalOfferPrice>\n                <OfferItem OfferItemID=\"OfferItemID2\">\n                    <PassengerRefs>SH2</PassengerRefs>\n                    <ALaCarteSelection>\n                        <Quantity>1</Quantity>\n                        <SegmentID>SEG_CDGDXB_6</SegmentID>\n                    </ALaCarteSelection>\n                </OfferItem>\n            </Offer>\n        </Order>\n        <Payments>\n            <Payment>\n                <Type>CC</Type>\n                <Method>\n                    <PaymentCard>\n                        <CardType>CREDIT</CardType>\n                        <CardCode>CA</CardCode>\n                        <CardNumber>5456912312789555</CardNumber>\n                        <SeriesCode>888</SeriesCode>\n\t\t\t\t\t\t<CardHolderName>John Jones</CardHolderName>\n                        <CardHolderBillingAddress>\n                            <Street>Waterside</Street>\n                            <CountryCode>GR</CountryCode>\n                        </CardHolderBillingAddress>\n                        <Surcharge>\n                            <Amount Code=\"EUR\">0.00</Amount>\n                        </Surcharge>\n                        <EffectiveExpireDate>\n                            <Effective>1212</Effective>\n                            <Expiration>1220</Expiration>\n                        </EffectiveExpireDate>\n                    </PaymentCard>\n                </Method>\n                <Amount Code=\"EUR\">3740.65</Amount>\n            </Payment>\n        </Payments>\n        <DataLists>\n            <PassengerList>\n                <Passenger PassengerID=\"SH1\">\n                    <PTC>ADT</PTC>\n                    <Individual>\n                        <GivenName>John</GivenName>\n                        <Surname>Jones</Surname>\n                    </Individual>\n                    <ContactInfoRef>SH1_CONT</ContactInfoRef>\n                </Passenger>\n                <Passenger PassengerID=\"SH2\">\n                    <PTC>CHD</PTC>\n                    <Individual>\n                        <GivenName>Mary</GivenName>\n                        <Surname>Jones</Surname>\n                    </Individual>\n                    <ContactInfoRef>SH2_CONT</ContactInfoRef>\n                </Passenger>\n            </PassengerList>\n            <ContactList>\n                <ContactInformation ContactID=\"SH1_CONT\">\n                    <ContactProvided>\n                        <EmailAddress>\n                            <EmailAddressValue>john@test.com</EmailAddressValue>\n                        </EmailAddress>\n                    </ContactProvided>\n                </ContactInformation>\n                <ContactInformation ContactID=\"SH2_CONT\">\n                    <ContactProvided>\n                        <EmailAddress>\n                            <EmailAddressValue>mary@test.com</EmailAddressValue>\n                        </EmailAddress>\n                    </ContactProvided>\n                </ContactInformation>\n            </ContactList>\n        </DataLists>\n    </Query>\n</OrderCreateRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OneWay 1ADT",
+			"item": [
+				{
+					"name": "AirShoppingRQ Oneway - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>Kronos NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>LHR</AirportCode>\r\n          <Date>2018-12-23</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>BCN</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OfferPriceRQ Oneway - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OfferPriceRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"201-a1d0c0941163453392c12c6ebec49f7d\">\r\n\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t</OfferItem>\r\n\t\t</Offer>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</OfferPriceRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OfferPriceRQ Oneway - with alaCarte - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OfferPriceRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Offer OfferID=\"OFFER13\" Owner=\"C9\" ResponseID=\"201-9a3dab33c1984543a3b37e0cd198bbb1\">\r\n\t\t\t<OfferItem OfferItemID=\"OFFERITEM13_1\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t</OfferItem>\r\n\t\t</Offer> \r\n\t\t<Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"C9\" ResponseID=\"201-9a3dab33c1984543a3b37e0cd198bbb1\">\r\n\t\t\t<OfferItem OfferItemID=\"OfferItemID1\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t<SegmentID>SEG_PRGBCN_1</SegmentID>\r\n\t\t\t\t</ALaCarteSelection>\r\n\t\t\t</OfferItem>\r\n\t\t</Offer>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</OfferPriceRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OfferPriceRQ Oneway - with multiple - alaCarte - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OfferPriceRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Zeus Travel</Name>\r\n\t\t\t\t<IATA_Number>12312312</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Offer OfferID=\"OFFER13\" Owner=\"C9\" ResponseID=\"201-9a3dab33c1984543a3b37e0cd198bbb1\">\r\n\t\t\t<OfferItem OfferItemID=\"OFFERITEM13_1\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t</OfferItem>\r\n\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"ALaCarteOfferID_1\" Owner=\"C9\" ResponseID=\"201-9a3dab33c1984543a3b37e0cd198bbb1\">\r\n\t\t\t<OfferItem OfferItemID=\"OfferItemID1\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t<SegmentID>SEG_PRGBCN_1</SegmentID>\r\n\t\t\t\t</ALaCarteSelection>\r\n\t\t\t</OfferItem>\r\n\t\t\t<OfferItem OfferItemID=\"OfferItemID4\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t</OfferItem>\r\n\t\t\t\t<OfferItem OfferItemID=\"OfferItemID48\">\r\n\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t<SegmentID>SEG_LHRPRG_2</SegmentID>\r\n\t\t\t\t</ALaCarteSelection>\r\n\t\t\t</OfferItem>\r\n\t\t</Offer>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n\t</DataLists>\r\n</OfferPriceRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ Oneway - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <Query>\r\n    <Order>\r\n      <Offer OfferID=\"PRICEDOFFER1\" Owner=\"C9\" ResponseID=\"213-9b453cddea3f4fae95fc7c057bf1b1f2\">\r\n        <TotalOfferPrice Code=\"EUR\">746.09</TotalOfferPrice>\r\n        <OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n          <PassengerRefs>SH1</PassengerRefs>\r\n        </OfferItem>\r\n      </Offer>\r\n    </Order>\r\n    <Payments>\r\n      <Payment>\r\n        <Type>CC</Type>\r\n        <Method>\r\n          <PaymentCard>\r\n            <CardType>CREDIT</CardType>\r\n            <CardCode>CA</CardCode>\r\n            <CardNumber>5456912312789555</CardNumber>\r\n            <SeriesCode>888</SeriesCode>\r\n\t\t\t<CardHolderName>John Jones</CardHolderName>\r\n            <CardHolderBillingAddress>\r\n              <Street>Waterside</Street>\r\n              <CountryCode>GR</CountryCode>\r\n            </CardHolderBillingAddress>\r\n            <Surcharge>\r\n              <Amount Code=\"EUR\">0.00</Amount>\r\n            </Surcharge>\r\n            <EffectiveExpireDate>\r\n              <Effective>1212</Effective>\r\n              <Expiration>1220</Expiration>\r\n            </EffectiveExpireDate>\r\n          </PaymentCard>\r\n        </Method>\r\n        <Amount Code=\"EUR\">746.09</Amount>\r\n      </Payment>\r\n    </Payments>\r\n    <DataLists>\r\n      <PassengerList>\r\n        <Passenger PassengerID=\"SH1\">\r\n          <PTC>ADT</PTC>\r\n          <Individual>\r\n            <GivenName>John</GivenName>\r\n            <Surname>Jones</Surname>\r\n          </Individual>\r\n          <ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n        </Passenger>\r\n      </PassengerList>\r\n      <ContactList>\r\n        <ContactInformation ContactID=\"SH1_CONT\">\r\n          <ContactProvided>\r\n            <EmailAddress>\r\n              <EmailAddressValue>john@test.com</EmailAddressValue>\r\n            </EmailAddress>\r\n          </ContactProvided>\r\n        </ContactInformation>\r\n      </ContactList>\r\n    </DataLists>\r\n  </Query>\r\n</OrderCreateRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderReshopRQ - Add pax ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderReshopRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID>D16AV5</OrderID>\r\n\t\t<Reshop>\r\n\t\t\t<OrderServicing>\r\n\t\t\t\t<Add>\r\n\t\t\t\t\t<Passengers>\r\n\t\t\t\t\t\t<PassengerReferences>PAX2</PassengerReferences>\r\n\t\t\t\t\t</Passengers>\r\n\t\t\t\t</Add>\r\n\t\t\t</OrderServicing>\r\n\t\t</Reshop>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"PAX2\">\r\n\t\t\t\t<PTC>CHD</PTC>\r\n\t\t\t\t<Individual>\r\n\t\t\t\t\t<Gender>Male</Gender>\r\n\t\t\t\t\t<GivenName>Scoopy</GivenName>\r\n\t\t\t\t\t<Surname>Doo</Surname>\r\n\t\t\t\t</Individual>\r\n\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t\t<ContactList>\r\n\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>doo@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactProvided>\r\n\t\t\t</ContactInformation>\r\n\t\t</ContactList>\r\n\t</DataLists>\r\n</OrderReshopRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderChangeRQ - Add pax",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderChangeRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Zeus Travel</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16AV5</OrderID>\r\n\t\t<OrderServicing>\r\n\t\t\t<AcceptOffer>\r\n\t\t\t\t<Offer OfferID=\"OfferID6\" Owner=\"C9\" ResponseID=\"107-af1c554fd2db4ab1ab317a5cd600ab46\">\r\n\t\t\t\t\t<OfferItem OfferItemID=\"OfferItemID6_1\">\r\n\t\t\t\t\t\t<PassengerRefs>PAX2</PassengerRefs>\r\n\t\t\t\t\t</OfferItem>\r\n\t\t\t\t</Offer>\r\n\t\t\t</AcceptOffer>\r\n\t\t</OrderServicing>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<Cash CashInd=\"true\"/>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">796.59</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"PAX2\">\r\n\t\t\t\t<PTC>CHD</PTC>\r\n\t\t\t\t<Individual>\r\n\t\t\t\t\t<Gender>Male</Gender>\r\n\t\t\t\t\t<GivenName>Scoopy</GivenName>\r\n\t\t\t\t\t<Surname>Doo</Surname>\r\n\t\t\t\t</Individual>\r\n\t\t\t\t<ContactInfoRef>CNTCT_PAX2</ContactInfoRef>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t\t<ContactList>\r\n\t\t\t<ContactInformation ContactID=\"CNTCT_PAX2\">\r\n\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>doo@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactProvided>\r\n\t\t\t</ContactInformation>\r\n\t\t</ContactList>\r\n\t</DataLists>\r\n</OrderChangeRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderRetrieveRQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderRetrieveRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Filters>\r\n\t\t\t<OrderID Owner=\"C9\">D16AV5</OrderID>\r\n\t\t</Filters>\r\n\t</Query>\r\n</OrderRetrieveRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderHistoryRQ ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<OrderHistoryRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16AV5</OrderID>\r\n\t</Query>\r\n</OrderHistoryRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCancelRQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<OrderCancelRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n<Query>\r\n\t<Order OrderID=\"D16AV5\" Owner=\"C9\"></Order>\r\n</Query>\r\n</OrderCancelRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OneWay 2ADT",
+			"item": [
+				{
+					"name": "AirShoppingRQ Oneway - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>LHR</AirportCode>\r\n          <Date>2018-12-29</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n    \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n       <Passenger PassengerID=\"SH2\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ Oneway - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <Query>\r\n    <Order>\r\n      <Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"201-785a631294394b488804fe608eb86549\">\r\n        <TotalOfferPrice Code=\"EUR\">2812.48</TotalOfferPrice>\r\n        <OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n          <PassengerRefs>SH2</PassengerRefs>\r\n        </OfferItem>\r\n        <OfferItem OfferItemID=\"OFFERITEM1_2\">\r\n          <PassengerRefs>SH1</PassengerRefs>\r\n        </OfferItem>\r\n      </Offer>\r\n    </Order>\r\n    <Payments>\r\n      <Payment>\r\n        <Type>CC</Type>\r\n        <Method>\r\n          <PaymentCard>\r\n            <CardType>CREDIT</CardType>\r\n            <CardCode>CA</CardCode>\r\n            <CardNumber>5456912312789555</CardNumber>\r\n            <SeriesCode>888</SeriesCode>\r\n            <CardHolderName>John Jones</CardHolderName>\r\n            <CardHolderBillingAddress>\r\n              <Street>Waterside</Street>\r\n              <CountryCode>GR</CountryCode>\r\n            </CardHolderBillingAddress>\r\n            <Surcharge>\r\n              <Amount Code=\"EUR\">0.00</Amount>\r\n            </Surcharge>\r\n            <EffectiveExpireDate>\r\n              <Effective>1212</Effective>\r\n              <Expiration>1220</Expiration>\r\n            </EffectiveExpireDate>\r\n          </PaymentCard>\r\n        </Method>\r\n        <Amount Code=\"EUR\">2812.48</Amount>\r\n      </Payment>\r\n    </Payments>\r\n    <DataLists>\r\n      <PassengerList>\r\n        <Passenger PassengerID=\"SH1\">\r\n          <PTC>ADT</PTC>\r\n          <Individual>\r\n            <GivenName>John</GivenName>\r\n            <Surname>Jones</Surname>\r\n          </Individual>\r\n          <ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n        </Passenger>\r\n        <Passenger PassengerID=\"SH2\">\r\n          <PTC>ADT</PTC>\r\n          <Individual>\r\n            <GivenName>Joan</GivenName>\r\n            <Surname>Jones</Surname>\r\n          </Individual>\r\n          <ContactInfoRef>SH2_CONT</ContactInfoRef>\r\n        </Passenger>\r\n      </PassengerList>\r\n      <ContactList>\r\n        <ContactInformation ContactID=\"SH1_CONT\">\r\n          <ContactProvided>\r\n            <EmailAddress>\r\n              <EmailAddressValue>john@test.com</EmailAddressValue>\r\n            </EmailAddress>\r\n          </ContactProvided>\r\n        </ContactInformation>\r\n          <ContactInformation ContactID=\"SH2_CONT\">\r\n          <ContactProvided>\r\n            <EmailAddress>\r\n              <EmailAddressValue>joan@test.com</EmailAddressValue>\r\n            </EmailAddress>\r\n          </ContactProvided>\r\n        </ContactInformation>\r\n      </ContactList>\r\n    </DataLists>\r\n  </Query>\r\n</OrderCreateRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roundtrip 2ADT",
+			"item": [
+				{
+					"name": "AirShoppingRQ Roundtrip - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>LHR</AirportCode>\r\n          <Date>2018-11-20</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>BCN</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>BCN</AirportCode>\r\n          <Date>2018-11-28</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>LHR</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>\r\n  <Preference>\r\n    <CabinPreferences>\r\n      <CabinType>\r\n        <Code>M</Code>\r\n      </CabinType>\r\n    </CabinPreferences>\r\n  </Preference>\r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n       <Passenger PassengerID=\"SH2\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ Roundtrip - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>KRONOS NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <Query>\r\n    <Order>\r\n      <Offer OfferID=\"OFFER24\" Owner=\"C9\" ResponseID=\"201-be73269a5b5e48008e82deacb24060dc\">\r\n        <TotalOfferPrice Code=\"EUR\">1086.58</TotalOfferPrice>\r\n        <OfferItem OfferItemID=\"OFFERITEM24_1\">\r\n          <PassengerRefs>SH2</PassengerRefs>\r\n        </OfferItem>\r\n        <OfferItem OfferItemID=\"OFFERITEM24_2\">\r\n          <PassengerRefs>SH1</PassengerRefs>\r\n        </OfferItem>\r\n      </Offer>\r\n      <Offer OfferID=\"OFFER84\" Owner=\"C9\" ResponseID=\"201-be73269a5b5e48008e82deacb24060dc\">\r\n        <TotalOfferPrice Code=\"EUR\">1086.58</TotalOfferPrice>\r\n        <OfferItem OfferItemID=\"OFFERITEM84_1\">\r\n          <PassengerRefs>SH2</PassengerRefs>\r\n        </OfferItem>\r\n        <OfferItem OfferItemID=\"OFFERITEM84_2\">\r\n          <PassengerRefs>SH1</PassengerRefs>\r\n        </OfferItem>\r\n      </Offer>\r\n    </Order>\r\n    <Payments>\r\n      <Payment>\r\n            <Type>CC</Type>\r\n        <Method>\r\n          <PaymentCard>\r\n            <CardType>CREDIT</CardType>\r\n            <CardCode>CA</CardCode>\r\n            <CardNumber>5456912312789555</CardNumber>\r\n            <SeriesCode>888</SeriesCode>\r\n\t\t\t<CardHolderName>John Jones</CardHolderName>\r\n            <CardHolderBillingAddress>\r\n              <Street>Waterside</Street>\r\n              <CountryCode>GR</CountryCode>\r\n            </CardHolderBillingAddress>\r\n            <Surcharge>\r\n              <Amount Code=\"EUR\">0.00</Amount>\r\n            </Surcharge>\r\n            <EffectiveExpireDate>\r\n              <Effective>1212</Effective>\r\n              <Expiration>1220</Expiration>\r\n            </EffectiveExpireDate>\r\n          </PaymentCard>\r\n        </Method>\r\n        <Amount Code=\"EUR\">2173.16</Amount>\r\n      </Payment>\r\n    </Payments>\r\n    <DataLists>\r\n      <PassengerList>\r\n        <Passenger PassengerID=\"SH1\">\r\n          <PTC>ADT</PTC>\r\n          <Individual>\r\n            <GivenName>John</GivenName>\r\n            <Surname>Jones</Surname>\r\n          </Individual>\r\n          <ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n        </Passenger>\r\n        <Passenger PassengerID=\"SH2\">\r\n          <PTC>ADT</PTC>\r\n          <Individual>\r\n            <GivenName>Joan</GivenName>\r\n            <Surname>Jones</Surname>\r\n          </Individual>\r\n          <ContactInfoRef>SH2_CONT</ContactInfoRef>\r\n        </Passenger>\r\n      </PassengerList>\r\n      <ContactList>\r\n        <ContactInformation ContactID=\"SH1_CONT\">\r\n          <ContactProvided>\r\n            <EmailAddress>\r\n              <EmailAddressValue>john@test.com</EmailAddressValue>\r\n            </EmailAddress>\r\n          </ContactProvided>\r\n        </ContactInformation>\r\n          <ContactInformation ContactID=\"SH2_CONT\">\r\n          <ContactProvided>\r\n            <EmailAddress>\r\n              <EmailAddressValue>joan@test.com</EmailAddressValue>\r\n            </EmailAddress>\r\n          </ContactProvided>\r\n        </ContactInformation>\r\n      </ContactList>\r\n    </DataLists>\r\n  </Query>\r\n</OrderCreateRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roundtrip 1ADT",
+			"item": [
+				{
+					"name": "AirShoppingRQ Roundtrip - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\n  <Document>\n    <Name>KRONOS NDC GATEWAY</Name>\n    <ReferenceVersion>1.0</ReferenceVersion>\n  </Document>\n  <Party>\n    <Sender>\n      <TravelAgencySender>\n        <Name>JR TECHNOLOGIES</Name>\n        <IATA_Number>20200154</IATA_Number>\n        <AgencyID>00010080</AgencyID>\n      </TravelAgencySender>\n    </Sender>\n  </Party>\n  <CoreQuery>\n    <OriginDestinations>\n      <OriginDestination>\n        <Departure>\n          <AirportCode>LHR</AirportCode>\n          <Date>2018-12-25</Date>\n        </Departure>\n        <Arrival>\n          <AirportCode>BCN</AirportCode>\n        </Arrival>\n      </OriginDestination>\n      <OriginDestination>\n        <Departure>\n          <AirportCode>BCN</AirportCode>\n          <Date>2018-12-29</Date>\n        </Departure>\n        <Arrival>\n          <AirportCode>LHR</AirportCode>\n        </Arrival>\n      </OriginDestination>\n    </OriginDestinations>\n  </CoreQuery>\n  <Preference>\n    <CabinPreferences>\n      <CabinType>\n        <Code>C</Code>\n      </CabinType>\n    </CabinPreferences>\n  </Preference>\n  <DataLists>\n    <PassengerList>\n      <Passenger PassengerID=\"SH1\">\n        <PTC>ADT</PTC>\n      </Passenger>\n    </PassengerList>\n  </DataLists>\n</AirShoppingRQ>\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ Roundtrip - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\n  <Document>\n    <Name>KRONOS NDC GATEWAY</Name>\n    <ReferenceVersion>1.0</ReferenceVersion>\n  </Document>\n  <Party>\n    <Sender>\n      <TravelAgencySender>\n        <Name>JR TECHNOLOGIES</Name>\n        <IATA_Number>20200154</IATA_Number>\n        <AgencyID>00010080</AgencyID>\n      </TravelAgencySender>\n    </Sender>\n  </Party>\n  <Query>\n    <Order>\n      <Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"201-0a3dd1e02945402b89efd060fd811a2c\">\n        <TotalOfferPrice Code=\"EUR\">364.58</TotalOfferPrice>\n        <OfferItem OfferItemID=\"OFFERITEM1_1\">\n          <PassengerRefs>SH1</PassengerRefs>\n        </OfferItem>\n      </Offer>\n      <Offer OfferID=\"OFFER67\" Owner=\"C9\" ResponseID=\"201-0a3dd1e02945402b89efd060fd811a2c\">\n        <TotalOfferPrice Code=\"EUR\">536.29</TotalOfferPrice>\n        <OfferItem OfferItemID=\"OFFERITEM67_1\">\n          <PassengerRefs>SH1</PassengerRefs>\n        </OfferItem>\n      </Offer>\n    </Order>\n    <Payments>\n      <Payment>\n        <Type>CA</Type>\n        <Method>\n          <PaymentCard>\n            <CardType>CREDIT</CardType>\n            <CardCode>CA</CardCode>\n            <CardNumber>5456912312789555</CardNumber>\n            <SeriesCode>888</SeriesCode>\n            <CardHolderName>Ben Afflect</CardHolderName>\n            <CardHolderBillingAddress>\n              <Street>Waterside</Street>\n              <CountryCode>GR</CountryCode>\n            </CardHolderBillingAddress>\n            <Surcharge>\n              <Amount Code=\"EUR\">0.00</Amount>\n            </Surcharge>\n            <EffectiveExpireDate>\n              <Effective>1212</Effective>\n              <Expiration>1220</Expiration>\n            </EffectiveExpireDate>\n          </PaymentCard>\n        </Method>\n        <Amount Code=\"EUR\">900.87</Amount>\n      </Payment>\n    </Payments>\n    <DataLists>\n      <PassengerList>\n        <Passenger PassengerID=\"SH1\">\n          <PTC>ADT</PTC>\n          <Individual>\n            <GivenName>Ben</GivenName>\n            <Surname>Affleck</Surname>\n          </Individual>\n          <ContactInfoRef>SH1_CONT</ContactInfoRef>\n        </Passenger>\n      </PassengerList>\n      <ContactList>\n        <ContactInformation ContactID=\"SH1_CONT\">\n          <ContactProvided>\n            <EmailAddress>\n              <EmailAddressValue>ben@test.com</EmailAddressValue>\n            </EmailAddress>\n          </ContactProvided>\n        </ContactInformation>\n      </ContactList>\n    </DataLists>\n  </Query>\n</OrderCreateRQ>\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderReshopRQ - Update Segment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderReshopRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Contacts>\r\n\t\t\t\t\t<Contact>\r\n\t\t\t\t\t\t<EmailContact>\r\n\t\t\t\t\t\t\t<Address>ndc@usdtravel.com</Address>\r\n\t\t\t\t\t\t</EmailContact>\r\n\t\t\t\t\t</Contact>\r\n\t\t\t\t</Contacts>\r\n\t\t\t\t<PseudoCity>A4A</PseudoCity>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">00010080</AgencyID>\r\n\t\t\t\t<AgentUser>\r\n\t\t\t\t\t<Name>jsmith</Name>\r\n\t\t\t\t\t<AgentUserID>jsmith007</AgentUserID>\r\n\t\t\t\t\t<UserRole>Admin</UserRole>\r\n\t\t\t\t</AgentUser>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID>D16B45</OrderID>\r\n\t\t<Reshop>\r\n\t\t\t<OrderServicing>\r\n\t\t\t\t<Add>\r\n\t\t\t\t\t<FlightQuery>\r\n\t\t\t\t\t\t<OriginDestinations>\r\n\t\t\t\t\t\t\t<OriginDestination>\r\n\t\t\t\t\t\t\t\t<Departure>\r\n\t\t\t\t\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t\t\t\t\t<Date>2018-12-20</Date>\r\n\t\t\t\t\t\t\t\t</Departure>\r\n\t\t\t\t\t\t\t\t<Arrival>\r\n\t\t\t\t\t\t\t\t\t<AirportCode>BCN</AirportCode>\r\n\t\t\t\t\t\t\t\t</Arrival>\r\n\t\t\t\t\t\t\t</OriginDestination>\r\n\t\t\t\t\t\t</OriginDestinations>\r\n\t\t\t\t\t</FlightQuery>\r\n\t\t\t\t\t<Preference>\r\n\t\t\t\t\t\t<CabinPreferences> \t\t\t\r\n\t\t\t\t\t\t\t<CabinType> \t\t\t\t\r\n\t\t\t\t\t\t\t\t<Code>M</Code>\r\n\t\t\t\t\t\t\t</CabinType> \r\n\t\t\t\t\t\t</CabinPreferences>\r\n\t\t\t\t\t</Preference>\r\n\t\t\t\t</Add>\r\n\t\t\t\t<Delete>\r\n\t\t\t\t\t<OrderItem OrderItemID=\"ORDERITEM1\"/>\r\n\t\t\t\t</Delete>\r\n\t\t\t</OrderServicing>\r\n\t\t</Reshop>\r\n\t</Query>\r\n</OrderReshopRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderChangeRQ - Update Segment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderChangeRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Kronos Travel</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16B45</OrderID>\r\n\t\t<OrderServicing>\r\n\t\t\t<AcceptOffer>\r\n\t\t\t\t<Offer OfferID=\"OfferID1\" Owner=\"C9\" ResponseID=\"107-a203f07ee6ad4b55b6523ea539b5b5f7\">\r\n\t\t\t\t\t<OfferItem OfferItemID=\"OfferItemID1_1\">\r\n\t\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t\t</OfferItem>\r\n\t\t\t\t</Offer>\r\n\t\t\t</AcceptOffer>\r\n\t\t\t<Delete>\r\n\t\t\t\t<OrderItemID>ORDERITEM1</OrderItemID>\r\n\t\t\t</Delete> \r\n\t\t</OrderServicing>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<Cash CashInd=\"true\"/>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">275.58</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t</Query>\r\n\t<DataLists>\r\n\t   <PassengerList>\r\n                <Passenger PassengerID=\"SH1\">\r\n                    <PTC>ADT</PTC>\r\n                    <Individual IndividualID=\"IND_SH1\">\r\n                        <GivenName>Ben</GivenName>\r\n                        <Surname>Affleck</Surname>\r\n                    </Individual>\r\n                    <ContactInfoRef>CNTCT_SH1</ContactInfoRef>\r\n                </Passenger>\r\n            </PassengerList>\r\n            <ContactList>\r\n                <ContactInformation ContactID=\"CNTCT_SH1\">\r\n                    <ContactProvided>\r\n                        <EmailAddress>\r\n                            <EmailAddressValue>ben@test.com</EmailAddressValue>\r\n                        </EmailAddress>\r\n                    </ContactProvided>\r\n                </ContactInformation>\r\n            </ContactList>\r\n\t</DataLists>\r\n</OrderChangeRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServiceList",
+			"item": [
+				{
+					"name": "ServiceListRQ  - OrderID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<ServiceListRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Recipient>\r\n\t\t\t<ORA_Recipient>\r\n\t\t\t\t<AirlineID>C9</AirlineID>\r\n\t\t\t</ORA_Recipient>\r\n\t\t</Recipient>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16B45</OrderID>\r\n\t</Query>\r\n\t<Qualifier>\r\n\t\t<ServiceQualifier>\r\n\t\t\t<Encoding>\r\n\t\t\t\t<SubCode>0CC</SubCode>\r\n\t\t\t</Encoding>\r\n\t\t\t<Include>true</Include>\r\n\t\t</ServiceQualifier>\r\n\t</Qualifier>\r\n</ServiceListRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ServiceListRQ  - FlightSegment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<ServiceListRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Zeus Travel</Name>\r\n\t\t\t\t<IATA_Number>12312312</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OriginDestination>\r\n\t\t\t<Flight>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>CDG</AirportCode>\r\n\t\t\t\t\t<Date>2018-12-28</Date>\r\n\t\t\t\t\t<Time>15:40</Time>\r\n\t\t\t\t\t<AirportName>Charles de Gaulle Airport</AirportName>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t<Date>2018-12-28</Date>\r\n\t\t\t\t\t<Time>15:40</Time>\r\n\t\t\t\t\t<AirportName>Heathrow Airport</AirportName>\r\n\t\t\t\t</Arrival>\r\n\t\t\t\t<MarketingCarrier>\r\n\t\t\t\t\t<AirlineID>C9</AirlineID>\r\n\t\t\t\t\t<FlightNumber>121</FlightNumber>\r\n\t\t\t\t</MarketingCarrier>\r\n\t\t\t\t<OperatingCarrier>\r\n\t\t\t\t\t<AirlineID>C9</AirlineID>\r\n\t\t\t\t\t<FlightNumber>121</FlightNumber>\r\n\t\t\t\t</OperatingCarrier>\r\n\t\t\t\t<Equipment>\r\n\t\t\t\t\t<AircraftCode>320</AircraftCode>\r\n\t\t\t\t\t<Name>A320</Name>\r\n\t\t\t\t</Equipment>\r\n\t\t\t</Flight>\r\n\t\t</OriginDestination>\r\n\t</Query>\r\n\t<Qualifier>\r\n\t\t<ServiceQualifier>\r\n\t\t\t<Encoding>\r\n\t\t\t\t<SubCode>0CC</SubCode>\r\n\t\t\t</Encoding>\r\n\t\t\t<Include>true</Include>\r\n\t\t</ServiceQualifier>\r\n\t</Qualifier>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH2\">\r\n\t\t\t\t<PTC>CHD</PTC>\r\n\t\t\t</Passenger>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</ServiceListRQ>\r\n"
+						},
+						"url": {
+							"raw": "http://192.168.26.1:8080/ndcgateway",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"26",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"ndcgateway"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SeatAvailability",
+			"item": [
+				{
+					"name": "SeatAvailabilityRQ  - preOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<SeatAvailabilityRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Kronos Travel</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<FlightSegment>\r\n\t\t\t<AirlineID>C9</AirlineID>\r\n\t\t\t <Departure>\r\n                    <AirportCode>LHR</AirportCode>\r\n                    <Date>2018-12-25</Date>\r\n                    <Time>08:00</Time>\r\n                    <AirportName>Heathrow Airport</AirportName>\r\n            </Departure>\r\n\t\t\t<Arrival>\r\n                    <AirportCode>BCN</AirportCode>\r\n                    <Date>2018-12-25</Date>\r\n                    <Time>10:59</Time>\r\n                    <AirportName>Barcelona–El Prat Airport</AirportName>\r\n            </Arrival>\r\n\t\t\t<FlightNumber>070</FlightNumber>\r\n\t\t\t<ClassOfService>\r\n\t\t\t\t<Code>C</Code>\r\n\t\t\t</ClassOfService>\r\n\t\t</FlightSegment>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</SeatAvailabilityRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SeatAvailabilityRQ  - postOrder ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<SeatAvailabilityRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>Kronos Travel</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID Owner=\"C9\">C9</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t\t<Participants>\r\n\t\t\t<Participant>\r\n\t\t\t\t<AggregatorParticipant SequenceNumber=\"1\">\r\n\t\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t\t<AggregatorID>88888888</AggregatorID>\r\n\t\t\t\t</AggregatorParticipant>\r\n\t\t\t</Participant>\r\n\t\t</Participants>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Order OrderID=\"D16B45\" Owner=\"C9\">\r\n\t\t</Order>\r\n\t</Query>\r\n</SeatAvailabilityRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interline OneWay",
+			"item": [
+				{
+					"name": "AirShoppingRQ Interline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>Kronos NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>CDG</AirportCode>\r\n          <Date>2018-12-26</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						},
+						"description": "OneWay"
+					},
+					"response": []
+				},
+				{
+					"name": "AirShoppingRQ Interline - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>Kronos NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>CDG</AirportCode>\r\n          <Date>2018-12-26</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n       <Passenger PassengerID=\"SH2\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						},
+						"description": "OneWay"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interline RoundTrip",
+			"item": [
+				{
+					"name": "AirShoppingRQ Interline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>Kronos NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>CDG</AirportCode>\r\n          <Date>2018-12-26</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>DXB</AirportCode>\r\n          <Date>2019-01-02</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>CDG</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						},
+						"description": "OneWay"
+					},
+					"response": []
+				},
+				{
+					"name": "AirShoppingRQ Interline - 2ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n  <Document>\r\n    <Name>Kronos NDC GATEWAY</Name>\r\n    <ReferenceVersion>1.0</ReferenceVersion>\r\n  </Document>\r\n  <Party>\r\n    <Sender>\r\n      <TravelAgencySender>\r\n        <Name>JR TECHNOLOGIES</Name>\r\n        <IATA_Number>20200154</IATA_Number>\r\n        <AgencyID>00010080</AgencyID>\r\n      </TravelAgencySender>\r\n    </Sender>\r\n  </Party>\r\n  <CoreQuery>\r\n    <OriginDestinations>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>CDG</AirportCode>\r\n          <Date>2018-12-26</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>DXB</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n      <OriginDestination>\r\n        <Departure>\r\n          <AirportCode>DXB</AirportCode>\r\n          <Date>2019-01-02</Date>\r\n        </Departure>\r\n        <Arrival>\r\n          <AirportCode>CDG</AirportCode>\r\n        </Arrival>\r\n      </OriginDestination>\r\n    </OriginDestinations>\r\n  </CoreQuery>  \r\n  <DataLists>\r\n    <PassengerList>\r\n      <Passenger PassengerID=\"SH1\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n      <Passenger PassengerID=\"SH2\">\r\n        <PTC>ADT</PTC>\r\n      </Passenger>\r\n    </PassengerList>\r\n  </DataLists>\r\n</AirShoppingRQ>"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						},
+						"description": "OneWay"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SeatAvailability - With Flight",
+			"description": "",
+			"item": [
+				{
+					"name": "AirShoppingRQ Roundtrip- 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<CoreQuery>\r\n\t\t<OriginDestinations>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t<Date>2018-03-29</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>BCN</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>BCN</AirportCode>\r\n\t\t\t\t\t<Date>2018-04-20</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t</OriginDestinations>\r\n\t</CoreQuery>\r\n\t<Preference>\r\n\t\t<CabinPreferences>\r\n\t\t\t<CabinType>\r\n\t\t\t\t<Code>M</Code>\r\n\t\t\t</CabinType>\r\n\t\t</CabinPreferences>\r\n\t</Preference>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</AirShoppingRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ ROundtrip - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Order>\r\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"201-0b096201428a47b4941f0f0c1fc71aa1\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">275.58</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t\t<Offer OfferID=\"OFFER67\" Owner=\"C9\" ResponseID=\"201-0b096201428a47b4941f0f0c1fc71aa1\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">275.58</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM67_1\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t</Order>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<PaymentCard>\r\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\r\n\t\t\t\t\t\t<CardCode>CA</CardCode>\r\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\r\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\r\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\r\n\t\t\t\t\t\t<CardHolderBillingAddress>\r\n\t\t\t\t\t\t\t<Street>Waterside</Street>\r\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\r\n\t\t\t\t\t\t</CardHolderBillingAddress>\r\n\t\t\t\t\t\t<Surcharge>\r\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\r\n\t\t\t\t\t\t</Surcharge>\r\n\t\t\t\t\t\t<EffectiveExpireDate>\r\n\t\t\t\t\t\t\t<Effective>1212</Effective>\r\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\r\n\t\t\t\t\t\t</EffectiveExpireDate>\r\n\t\t\t\t\t</PaymentCard>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">693.87</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t\t<DataLists>\r\n\t\t\t<PassengerList>\r\n\t\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>Ben</GivenName>\r\n\t\t\t\t\t\t<Surname>Affleck</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t</PassengerList>\r\n\t\t\t<ContactList>\r\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t\t<EmailAddressValue>ben@test.com</EmailAddressValue>\r\n\t\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t\t</ContactProvided>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t</ContactList>\r\n\t\t</DataLists>\r\n\t</Query>\r\n</OrderCreateRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SeatAvailabilityRQ  - With Flight",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<SeatAvailabilityRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<FlightSegment>\r\n\t\t\t<AirlineID>C9</AirlineID>\r\n\t\t\t<Departure>\r\n\t\t\t\t<AirportCode>BCN</AirportCode>\r\n\t\t\t\t<Date>2018-04-20</Date>\r\n\t\t\t\t<Time>07:50</Time>\r\n\t\t\t\t<AirportName>Barcelona–El Prat Airport</AirportName>\r\n\t\t\t</Departure>\r\n\t\t\t<Arrival>\r\n\t\t\t\t<AirportCode>CDG</AirportCode>\r\n\t\t\t\t<Date>2018-04-20</Date>\r\n\t\t\t\t<Time>09:27</Time>\r\n\t\t\t\t<AirportName>Charles de Gaulle Airport</AirportName>\r\n\t\t\t</Arrival>\r\n\t\t\t<FlightNumber>049</FlightNumber>\r\n\t\t\t<ClassOfService>\r\n\t\t\t\t<Code>C</Code>\r\n\t\t\t</ClassOfService>\r\n\t\t</FlightSegment>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</SeatAvailabilityRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderChangeRQ - Add pax copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderChangeRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16C45</OrderID>\r\n\t\t<OrderServicing>\r\n\t\t\t<AcceptOffer>\r\n\t\t\t\t<Offer OfferID=\"AlaCarteSeatOffer1\" Owner=\"C9\" ResponseID=\"215-4d19af7bc5134ff2a2baa61f8ed641ce\">\r\n\t\t\t\t\t<TotalOfferPrice Code=\"EUR\">0.00</TotalOfferPrice>\r\n\t\t\t\t\t<OfferItem OfferItemID=\"SEAT_OFFER_1\">\r\n\t\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t\t<SegmentID>SEG_BCNCDG_1</SegmentID>\r\n\t\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t\t\t<SeatSelection>\r\n\t\t\t\t\t\t\t<Row>1</Row>\r\n\t\t\t\t\t\t\t<Column>C</Column>\r\n\t\t\t\t\t\t</SeatSelection>\r\n\t\t\t\t\t</OfferItem>\r\n\t\t\t\t</Offer>\r\n\t\t\t</AcceptOffer>\r\n\t\t</OrderServicing>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<Cash CashInd=\"true\"/>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"GBP\">0.00</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t<Individual>\r\n\t\t\t\t\t<GivenName>Ben</GivenName>\r\n\t\t\t\t\t<Surname>Affleck</Surname>\r\n\t\t\t\t</Individual>\r\n\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t\t<ContactList>\r\n\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>ben@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactProvided>\r\n\t\t\t</ContactInformation>\r\n\t\t</ContactList>\r\n\t</DataLists>\r\n</OrderChangeRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderRetrieveRQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderRetrieveRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Filters>\r\n\t\t\t<OrderID Owner=\"C9\">D16C45</OrderID>\r\n\t\t</Filters>\r\n\t</Query>\r\n</OrderRetrieveRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0d79b2b-d8a6-46dc-bd9f-6df482886faa",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "28fb2a81-71a7-4354-a89d-89fa8138ba66",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "SeatAvailability - With OrderID",
+			"description": "",
+			"item": [
+				{
+					"name": "AirShoppingRQ - Oneway - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<AirShoppingRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<CoreQuery>\r\n\t\t<OriginDestinations>\r\n\t\t\t<OriginDestination>\r\n\t\t\t\t<Departure>\r\n\t\t\t\t\t<AirportCode>LHR</AirportCode>\r\n\t\t\t\t\t<Date>2018-03-29</Date>\r\n\t\t\t\t</Departure>\r\n\t\t\t\t<Arrival>\r\n\t\t\t\t\t<AirportCode>BCN</AirportCode>\r\n\t\t\t\t</Arrival>\r\n\t\t\t</OriginDestination>\r\n\t\t</OriginDestinations>\r\n\t</CoreQuery>\r\n\t<Preference>\r\n\t\t<CabinPreferences>\r\n\t\t\t<CabinType>\r\n\t\t\t\t<Code>M</Code>\r\n\t\t\t</CabinType>\r\n\t\t</CabinPreferences>\r\n\t</Preference>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t</DataLists>\r\n</AirShoppingRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderCreateRQ ROundtrip - 1ADT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderCreateRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Order>\r\n\t\t\t<Offer OfferID=\"OFFER1\" Owner=\"C9\" ResponseID=\"201-e7b72f79702a4b4cae2cbb1e6f3afc09\">\r\n\t\t\t\t<TotalOfferPrice Code=\"EUR\">275.58</TotalOfferPrice>\r\n\t\t\t\t<OfferItem OfferItemID=\"OFFERITEM1_1\">\r\n\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t</OfferItem>\r\n\t\t\t</Offer>\r\n\t\t</Order>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<PaymentCard>\r\n\t\t\t\t\t\t<CardType>CREDIT</CardType>\r\n\t\t\t\t\t\t<CardCode>CA</CardCode>\r\n\t\t\t\t\t\t<CardNumber>5456912312789555</CardNumber>\r\n\t\t\t\t\t\t<SeriesCode>888</SeriesCode>\r\n\t\t\t\t\t\t<CardHolderName refs=\"SH1\"/>\r\n\t\t\t\t\t\t<CardHolderBillingAddress>\r\n\t\t\t\t\t\t\t<Street>Waterside</Street>\r\n\t\t\t\t\t\t\t<CountryCode>GR</CountryCode>\r\n\t\t\t\t\t\t</CardHolderBillingAddress>\r\n\t\t\t\t\t\t<Surcharge>\r\n\t\t\t\t\t\t\t<Amount Code=\"EUR\">0.00</Amount>\r\n\t\t\t\t\t\t</Surcharge>\r\n\t\t\t\t\t\t<EffectiveExpireDate>\r\n\t\t\t\t\t\t\t<Effective>1212</Effective>\r\n\t\t\t\t\t\t\t<Expiration>1220</Expiration>\r\n\t\t\t\t\t\t</EffectiveExpireDate>\r\n\t\t\t\t\t</PaymentCard>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"EUR\">275.58</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t\t<DataLists>\r\n\t\t\t<PassengerList>\r\n\t\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t\t<Individual>\r\n\t\t\t\t\t\t<GivenName>Ben</GivenName>\r\n\t\t\t\t\t\t<Surname>Affleck</Surname>\r\n\t\t\t\t\t</Individual>\r\n\t\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t\t</Passenger>\r\n\t\t\t</PassengerList>\r\n\t\t\t<ContactList>\r\n\t\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t\t<EmailAddressValue>ben@test.com</EmailAddressValue>\r\n\t\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t\t</ContactProvided>\r\n\t\t\t\t</ContactInformation>\r\n\t\t\t</ContactList>\r\n\t\t</DataLists>\r\n\t</Query>\r\n</OrderCreateRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SeatAvailabilityRQ  - With OrderID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<SeatAvailabilityRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Order OrderID=\"D16CH5\" Owner=\"C9\"/>\r\n\t</Query>\r\n</SeatAvailabilityRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderChangeRQ - Add pax copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderChangeRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>KRONOS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<OrderID Owner=\"C9\">D16C65</OrderID>\r\n\t\t<OrderServicing>\r\n\t\t\t<AcceptOffer>\r\n\t\t\t\t<Offer OfferID=\"AlaCarteSeatOffer1\" Owner=\"C9\" ResponseID=\"215-5af20a9f55f84f24af0aacff069858fa\">\r\n\t\t\t\t\t<TotalOfferPrice Code=\"EUR\">0.00</TotalOfferPrice>\r\n\t\t\t\t\t<OfferItem OfferItemID=\"SEAT_OFFER_2\">\r\n\t\t\t\t\t\t<PassengerRefs>SH1</PassengerRefs>\r\n\t\t\t\t\t\t<ALaCarteSelection>\r\n\t\t\t\t\t\t\t<Quantity>1</Quantity>\r\n\t\t\t\t\t\t\t<SegmentID>SEG_LHRBCN_1</SegmentID>\r\n\t\t\t\t\t\t</ALaCarteSelection>\r\n\t\t\t\t\t\t<SeatSelection>\r\n\t\t\t\t\t\t\t<Row>1</Row>\r\n\t\t\t\t\t\t\t<Column>C</Column>\r\n\t\t\t\t\t\t</SeatSelection>\r\n\t\t\t\t\t</OfferItem>\r\n\t\t\t\t</Offer>\r\n\t\t\t</AcceptOffer>\r\n\t\t</OrderServicing>\r\n\t\t<Payments>\r\n\t\t\t<Payment>\r\n\t\t\t\t<Type>CA</Type>\r\n\t\t\t\t<Method>\r\n\t\t\t\t\t<Cash CashInd=\"true\"/>\r\n\t\t\t\t</Method>\r\n\t\t\t\t<Amount Code=\"GBP\">0.00</Amount>\r\n\t\t\t</Payment>\r\n\t\t</Payments>\r\n\t</Query>\r\n\t<DataLists>\r\n\t\t<PassengerList>\r\n\t\t\t<Passenger PassengerID=\"SH1\">\r\n\t\t\t\t<PTC>ADT</PTC>\r\n\t\t\t\t<Individual>\r\n\t\t\t\t\t<GivenName>Ben</GivenName>\r\n\t\t\t\t\t<Surname>Affleck</Surname>\r\n\t\t\t\t</Individual>\r\n\t\t\t\t<ContactInfoRef>SH1_CONT</ContactInfoRef>\r\n\t\t\t</Passenger>\r\n\t\t</PassengerList>\r\n\t\t<ContactList>\r\n\t\t\t<ContactInformation ContactID=\"SH1_CONT\">\r\n\t\t\t\t<ContactProvided>\r\n\t\t\t\t\t<EmailAddress>\r\n\t\t\t\t\t\t<EmailAddressValue>ben@test.com</EmailAddressValue>\r\n\t\t\t\t\t</EmailAddress>\r\n\t\t\t\t</ContactProvided>\r\n\t\t\t</ContactInformation>\r\n\t\t</ContactList>\r\n\t</DataLists>\r\n</OrderChangeRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderRetrieveRQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "Authorization-Key",
+								"value": "{{myapikey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<OrderRetrieveRQ EchoToken=\"{{$guid}}\" Version=\"IATA2017.2\" xmlns=\"http://www.iata.org/IATA/EDIST/2017.2\">\r\n\t<Document>\r\n\t\t<Name>ZEUS NDC GATEWAY</Name>\r\n\t\t<ReferenceVersion>1.0</ReferenceVersion>\r\n\t</Document>\r\n\t<Party>\r\n\t\t<Sender>\r\n\t\t\t<TravelAgencySender>\r\n\t\t\t\t<Name>JR TECHNOLOGIES</Name>\r\n\t\t\t\t<IATA_Number>20200154</IATA_Number>\r\n\t\t\t\t<AgencyID>00010080</AgencyID>\r\n\t\t\t</TravelAgencySender>\r\n\t\t</Sender>\r\n\t</Party>\r\n\t<Query>\r\n\t\t<Filters>\r\n\t\t\t<OrderID Owner=\"C9\">D16C65</OrderID>\r\n\t\t</Filters>\r\n\t</Query>\r\n</OrderRetrieveRQ>\r\n"
+						},
+						"url": {
+							"raw": "{{endpointurl}}",
+							"host": [
+								"{{endpointurl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0d79b2b-d8a6-46dc-bd9f-6df482886faa",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "28fb2a81-71a7-4354-a89d-89fa8138ba66",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
