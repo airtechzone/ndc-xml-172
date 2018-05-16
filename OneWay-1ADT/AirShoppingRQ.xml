@@ -1,0 +1,35 @@
+<AirShoppingRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+  <Document>
+    <Name>Kronos NDC GATEWAY</Name>
+    <ReferenceVersion>1.0</ReferenceVersion>
+  </Document>
+  <Party>
+    <Sender>
+      <TravelAgencySender>
+        <Name>JR TECHNOLOGIES</Name>
+        <IATA_Number>20200154</IATA_Number>
+        <AgencyID>00010080</AgencyID>
+      </TravelAgencySender>
+    </Sender>
+  </Party>
+  <CoreQuery>
+    <OriginDestinations>
+      <OriginDestination>
+        <Departure>
+          <AirportCode>LHR</AirportCode>
+          <Date>2018-12-23</Date>
+        </Departure>
+        <Arrival>
+          <AirportCode>BCN</AirportCode>
+        </Arrival>
+      </OriginDestination>
+    </OriginDestinations>
+  </CoreQuery>  
+  <DataLists>
+    <PassengerList>
+      <Passenger PassengerID="SH1">
+        <PTC>ADT</PTC>
+      </Passenger>
+    </PassengerList>
+  </DataLists>
+</AirShoppingRQ>

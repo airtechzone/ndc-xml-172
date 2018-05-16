@@ -1,0 +1,37 @@
+<OfferPriceRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<Name>KRONOS NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+	    <Sender>
+      <TravelAgencySender>
+        <Name>JR TECHNOLOGIES</Name>
+        <IATA_Number>20200154</IATA_Number>
+        <AgencyID>00010080</AgencyID>
+      </TravelAgencySender>
+    </Sender>
+		<Participants>
+			<Participant>
+				<AggregatorParticipant SequenceNumber="1">
+					<Name>JR TECHNOLOGIES</Name>
+					<AggregatorID>88888888</AggregatorID>
+				</AggregatorParticipant>
+			</Participant>
+		</Participants>
+	</Party>
+	<Query>
+		<Offer OfferID="OFFER1" Owner="C9" ResponseID="201-a1d0c0941163453392c12c6ebec49f7d">
+			<OfferItem OfferItemID="OFFERITEM1_1">
+				<PassengerRefs>SH1</PassengerRefs>
+			</OfferItem>
+		</Offer>
+	</Query>
+	<DataLists>
+		<PassengerList>
+			<Passenger PassengerID="SH1">
+				<PTC>ADT</PTC>
+			</Passenger>
+		</PassengerList>
+	</DataLists>
+</OfferPriceRQ>

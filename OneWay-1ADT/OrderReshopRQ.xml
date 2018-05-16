@@ -1,0 +1,49 @@
+<OrderReshopRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<Name>KRONOS NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+		<Sender>
+			<TravelAgencySender>
+				<Name>JR TECHNOLOGIES</Name>
+				<IATA_Number>20200154</IATA_Number>
+				<AgencyID>00010080</AgencyID>
+			</TravelAgencySender>
+		</Sender>
+	</Party>
+	<Query>
+		<OrderID>D16AV5</OrderID>
+		<Reshop>
+			<OrderServicing>
+				<Add>
+					<Passengers>
+						<PassengerReferences>PAX2</PassengerReferences>
+					</Passengers>
+				</Add>
+			</OrderServicing>
+		</Reshop>
+	</Query>
+	<DataLists>
+		<PassengerList>
+			<Passenger PassengerID="PAX2">
+				<PTC>CHD</PTC>
+				<Individual>
+					<Gender>Male</Gender>
+					<GivenName>Scoopy</GivenName>
+					<Surname>Doo</Surname>
+				</Individual>
+				<ContactInfoRef>SH1_CONT</ContactInfoRef>
+			</Passenger>
+		</PassengerList>
+		<ContactList>
+			<ContactInformation ContactID="SH1_CONT">
+				<ContactProvided>
+					<EmailAddress>
+						<EmailAddressValue>doo@test.com</EmailAddressValue>
+					</EmailAddress>
+				</ContactProvided>
+			</ContactInformation>
+		</ContactList>
+	</DataLists>
+</OrderReshopRQ>

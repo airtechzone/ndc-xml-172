@@ -1,0 +1,18 @@
+<OrderHistoryRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<Name>KRONOS NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+		<Sender>
+			<TravelAgencySender>
+				<Name>JR TECHNOLOGIES</Name>
+				<IATA_Number>20200154</IATA_Number>
+				<AgencyID>00010080</AgencyID>
+			</TravelAgencySender>
+		</Sender>
+	</Party>
+	<Query>
+		<OrderID Owner="C9">D16AV5</OrderID>
+	</Query>
+</OrderHistoryRQ>

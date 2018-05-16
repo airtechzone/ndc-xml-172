@@ -1,0 +1,72 @@
+<OrderCreateRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+  <Document>
+    <Name>KRONOS NDC GATEWAY</Name>
+    <ReferenceVersion>1.0</ReferenceVersion>
+  </Document>
+  <Party>
+    <Sender>
+      <TravelAgencySender>
+        <Name>JR TECHNOLOGIES</Name>
+        <IATA_Number>20200154</IATA_Number>
+        <AgencyID>00010080</AgencyID>
+      </TravelAgencySender>
+    </Sender>
+  </Party>
+  <Query>
+    <Order>
+      <Offer OfferID="PRICEDOFFER1" Owner="C9" ResponseID="213-9b453cddea3f4fae95fc7c057bf1b1f2">
+        <TotalOfferPrice Code="EUR">746.09</TotalOfferPrice>
+        <OfferItem OfferItemID="OFFERITEM1_1">
+          <PassengerRefs>SH1</PassengerRefs>
+        </OfferItem>
+      </Offer>
+    </Order>
+    <Payments>
+      <Payment>
+        <Type>CC</Type>
+        <Method>
+          <PaymentCard>
+            <CardType>CREDIT</CardType>
+            <CardCode>CA</CardCode>
+            <CardNumber>5456912312789555</CardNumber>
+            <SeriesCode>888</SeriesCode>
+			<CardHolderName>John Jones</CardHolderName>
+            <CardHolderBillingAddress>
+              <Street>Waterside</Street>
+              <CountryCode>GR</CountryCode>
+            </CardHolderBillingAddress>
+            <Surcharge>
+              <Amount Code="EUR">0.00</Amount>
+            </Surcharge>
+            <EffectiveExpireDate>
+              <Effective>1212</Effective>
+              <Expiration>1220</Expiration>
+            </EffectiveExpireDate>
+          </PaymentCard>
+        </Method>
+        <Amount Code="EUR">746.09</Amount>
+      </Payment>
+    </Payments>
+    <DataLists>
+      <PassengerList>
+        <Passenger PassengerID="SH1">
+          <PTC>ADT</PTC>
+          <Individual>
+            <GivenName>John</GivenName>
+            <Surname>Jones</Surname>
+          </Individual>
+          <ContactInfoRef>SH1_CONT</ContactInfoRef>
+        </Passenger>
+      </PassengerList>
+      <ContactList>
+        <ContactInformation ContactID="SH1_CONT">
+          <ContactProvided>
+            <EmailAddress>
+              <EmailAddressValue>john@test.com</EmailAddressValue>
+            </EmailAddress>
+          </ContactProvided>
+        </ContactInformation>
+      </ContactList>
+    </DataLists>
+  </Query>
+</OrderCreateRQ>

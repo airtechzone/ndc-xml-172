@@ -1,0 +1,66 @@
+<OrderChangeRQ EchoToken="{{$guid}}" Version="IATA2017.2" xmlns="http://www.iata.org/IATA/EDIST/2017.2">
+	<Document>
+		<Name>ZEUS NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+		<Sender>
+			<TravelAgencySender>
+				<Name>Zeus Travel</Name>
+				<IATA_Number>20200154</IATA_Number>
+				<AgencyID Owner="C9">C9</AgencyID>
+			</TravelAgencySender>
+		</Sender>
+		<Participants>
+			<Participant>
+				<AggregatorParticipant SequenceNumber="1">
+					<Name>JR TECHNOLOGIES</Name>
+					<AggregatorID>88888888</AggregatorID>
+				</AggregatorParticipant>
+			</Participant>
+		</Participants>
+	</Party>
+	<Query>
+		<OrderID Owner="C9">D16AV5</OrderID>
+		<OrderServicing>
+			<AcceptOffer>
+				<Offer OfferID="OfferID6" Owner="C9" ResponseID="107-af1c554fd2db4ab1ab317a5cd600ab46">
+					<OfferItem OfferItemID="OfferItemID6_1">
+						<PassengerRefs>PAX2</PassengerRefs>
+					</OfferItem>
+				</Offer>
+			</AcceptOffer>
+		</OrderServicing>
+		<Payments>
+			<Payment>
+				<Type>CA</Type>
+				<Method>
+					<Cash CashInd="true"/>
+				</Method>
+				<Amount Code="EUR">796.59</Amount>
+			</Payment>
+		</Payments>
+	</Query>
+	<DataLists>
+		<PassengerList>
+			<Passenger PassengerID="PAX2">
+				<PTC>CHD</PTC>
+				<Individual>
+					<Gender>Male</Gender>
+					<GivenName>Scoopy</GivenName>
+					<Surname>Doo</Surname>
+				</Individual>
+				<ContactInfoRef>CNTCT_PAX2</ContactInfoRef>
+			</Passenger>
+		</PassengerList>
+		<ContactList>
+			<ContactInformation ContactID="CNTCT_PAX2">
+				<ContactProvided>
+					<EmailAddress>
+						<EmailAddressValue>doo@test.com</EmailAddressValue>
+					</EmailAddress>
+				</ContactProvided>
+			</ContactInformation>
+		</ContactList>
+	</DataLists>
+</OrderChangeRQ>
